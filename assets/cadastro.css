@@ -1,0 +1,43 @@
+body.cadastro {
+    grid-template-rows: 120px 40px 1fr 40px;
+    grid-template-areas: "cabecalho" "navegacao" "principal" "rodape";
+}
+
+.principal {
+    height: calc(100vh - 200px);
+}
+
+.navegacao {
+    grid-area: navegacao;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    background-color: #6199da;
+}
+
+.navegacao > a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: 300;
+    font-size: 1.2rem;
+    background-color: #f32121;
+    padding: 5px 5px;
+    margin-right: 20px;
+    border-radius: 20px;
+    margin-top: 5px;
+}
+
+.navegacao > a.verdinho { background-color: rgb(135, 202, 135);}
+.navegacao > a.verde { background-color: rgb(80, 184, 80);}
+
+.conteudo {
+    font-size: 2rem;
+}
+
+.conteudo > .titulo {
+    font-size: 2.5rem;
+    font-weight: 300;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #999;
+    margin-bottom: 20px;
+}
