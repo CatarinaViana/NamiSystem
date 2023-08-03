@@ -19,7 +19,7 @@
                     <ul>
                         <li>
                             <a href="cadastro.php?dir=formulario&file=processar_formulario">
-                                Formulário de Candidatura
+                                Área do Candidato
                             </a>
                         </li>
                     </ul>

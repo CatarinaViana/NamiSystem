@@ -1,12 +1,10 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<div class="titulo">Formulário de Candidatura</div>
+
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Formulário de Candidatura</title>
-</head>
+
 <body>
-
-<h2>Formulário de Candidatura</h2>
-
 <form action="formulario/processar_formulario.php" method="POST">
 
 <div class="form-row">
@@ -29,20 +27,25 @@
             id="email" name="email" required><br>
     </div>
     <div class="form-group col-md-6">
-        <label for="linkedin">Link LinkedIn:</label>
+        <label for="linkedin">LinkedIn:</label>
         <input type="url" class="form-control"
             id="linkedin" name="linkedin" required><br>
     </div>
 </div>
 
 <div class="form-row">
-    <div class="form-group col-md-6">
-        <label for="cidade">Cidade e Estado onde Mora:</label>
+    <div class="form-group col-md-3">
+        <label for="cidade">Cidade:</label>
         <input type="text" class="form-control"
             id="cidade" name="cidade" required><br>
     </div>
+    <div class="form-group col-md-3">
+        <label for="estado">Estado:</label>
+        <input type="text" class="form-control"
+            id="estado" name="estado" required><br>
+    </div>
     <div class="form-group col-md-6">
-        <label for="disponibilidade">Disponibilidade para Trabalho:</label>
+        <label for="disponibilidade">Disponível para Trabalho:</label>
         <input type="radio" id="disponibilidade_sim" name="disponibilidade" value="Sim" required>
         <label for="disponibilidade_sim">Sim</label>
         <input type="radio" id="disponibilidade_nao" name="disponibilidade" value="Não" required>
@@ -64,8 +67,9 @@
             </select><br>  
         </div>
     </div>
-    <button type="button" id="add_linguagem">Adicionar outra linguagem</button><br>
+    <button type="button" id="add_linguagem">Adicionar outra linguagem</button><br><br>
     <input type="submit" value="Enviar">
+    <button class="btn btn-primary btn-lg">Salvar</button>
 </form>
 
 <script>
@@ -111,12 +115,13 @@
 // Conectar ao banco de dados
 $host = "localhost";
 $usuario = "root";
-$senha = "100888";
+$senha = "root";
 $banco = "NamiSystem";
 
 $conexao = mysqli_connect($host, $usuario, $senha, $banco);
 
-if ($conexao) {
+
+if (!$conexao) {
     die("Não foi possível conectar ao banco de dados: " . mysqli_connect_error());
 }
 
@@ -127,6 +132,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST["email"];
     $linkedin = $_POST["linkedin"];
     $cidade = $_POST["cidade"];
+    $estado = $_POST["estado"];
     $disponibilidade = $_POST["disponibilidade"];
     $linguagens_programacao = $_POST["linguagem_programacao"];
     $niveis_dominio = $_POST["nivel_dominio"];
@@ -135,8 +141,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     foreach ($linguagens_programacao as $index => $linguagem) {
         $nivel_dominio = $niveis_dominio[$index];
 
-        $sql = "INSERT INTO formulario (nome_completo, data_nascimento, email, linkedin, cidade, disponibilidade, linguagem_programacao, nivel_dominio)
-                VALUES ('$nome_completo', '$data_nascimento', '$email', '$linkedin', '$cidade', '$disponibilidade', '$linguagem', '$nivel_dominio')";
+        $sql = "INSERT INTO processar_formulario (nome_completo, data_nascimento, email, linkedin, cidade, estado, disponibilidade, linguagem_programacao, nivel_dominio)
+                VALUES ('$nome_completo', '$data_nascimento', '$email', '$linkedin', '$cidade', '$estado', '$disponibilidade', '$linguagem', '$nivel_dominio')";
 
         if (!mysqli_query($conexao, $sql)) {
             echo "Erro ao inserir os dados: " . mysqli_error($conexao);
@@ -144,6 +150,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     echo "Dados inseridos com sucesso!";
+
+    include "window.location.href='#';";
 }
 
 // Fechar a conexão

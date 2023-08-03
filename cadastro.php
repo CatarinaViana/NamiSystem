@@ -5,7 +5,6 @@
     <link href="https://fonts.googleapis.com/css2?family= Playfair +Display & display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets\estilo.css">
     <link rel="stylesheet" href="assets\cadastro.css">
-    <title>Formulário para Cadastro</title>
 </head>
 <body class="cadastro">
     <header class="cabecalho">
